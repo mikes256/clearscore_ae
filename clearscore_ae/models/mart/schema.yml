@@ -1,0 +1,33 @@
+
+version: 2
+
+models:
+  - name: mart_users_marketing
+    description: "table that will be used for marketing campaign with key metrics to track relevant data points"
+    columns:
+      - name: user_id
+        description: "The primary key for this table, each users identification"
+        data_tests:
+          - unique
+          - not_null
+      - name: gender
+        description: "The primary key for this table"
+        data_tests:
+          - accepted_values:
+              values: ['m', 'f', 'M', 'F']
+      - name: email
+        description: "User email address"
+        data_tests:
+          - unique
+      - name: marketing_opt_in
+        description: "has a user opted in for marketing true=yes, false=no"
+        data_tests:
+          - accepted_values:
+              values: ['True', 'False']
+      - name: created_at
+        description: "max created date for user acc"
+        loaded_at_field: created_at
+        freshness: 
+          warn_after: { count: 24, period: hour }
+          error_after: { count: 48, period: hour }
+              
