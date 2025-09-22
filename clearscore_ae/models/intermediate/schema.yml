@@ -2,63 +2,25 @@
 version: 2
 
 models:
-  - name: stg_sample_db__user_acc_attributes
-    description: "attributes of the account holder captured during the signup process"
+  - name: int_users_acc__core
+    description: "aggregates and consolidates the staging models into one unified core intermediate model"
     columns:
       - name: user_id
-        description: "The primary key for this table"
+        description: "the primary key for this table, users individual identity"
         data_tests:
           - unique
           - not_null
       - name: gender
-        description: "The primary key for this table"
+        description: "user gender"
         data_tests:
           - accepted_values:
               values: ['m', 'f', 'M', 'F']
-
-  - name: stg_sample_db__user_acc
-    description: "user record table, updated on 'created_at' date. displays users with an account"
-    columns:
-      - name: user_id
-        description: "The primary key for this table for each unique user"
-        data_tests:
-          - unique
-          - not_null
       - name: email
-        description: "User email address"
+        description: "user email address"
         data_tests:
           - unique
-      - name: is_internal_user
-        description: "is the user an internal user, True=yes, False=no"
-        data_tests:
-          - accepted_values:
-              values: ['True', 'False']
-
-  - name: stg_sample_db__user_mrktng_preferences
-    description: "table containing a record for when a users marketing opt-in preferences change"
-    columns:
-      - name: user_id
-        description: "The primary key for this table for each user"
-        data_tests:
-          - not_null
       - name: marketing_opt_in
         description: "has a user opted in for marketing true=yes, false=no"
         data_tests:
           - accepted_values:
               values: ['True', 'False']
-
-  - name: stg_sample_db__user_acc_reactivations
-    description: "table containing the timestamp an account was reactivated. Only users with reopened accounts will have records in this table"
-    columns:
-      - name: user_id
-        description: "The primary key for this table for each user"
-        data_tests:
-          - not_null
-
-  - name: stg_sample_db__user_acc_closures
-    description: "table containing the timestamp an account was closed. Only users with closed accounts will have records in this table"
-    columns:
-      - name: user_id
-        description: "The primary key for this table for each user"
-        data_tests:
-          - not_null
